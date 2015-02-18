@@ -23,6 +23,7 @@ var loginurl = 'https://tina.cwi.nl/Synergy/Nlogon.aspx';
 var workfurl = 'https://tina.cwi.nl/Synergy/docs/WflRequests.aspx';
 var lgouturl = 'https://tina.cwi.nl/Synergy/docs/SysClearSession.aspx';
 
+var approved = 0;
 
 function cp(prompt) {
 	var deferred = Q.defer();
@@ -115,6 +116,7 @@ readFile(fname).then(function(fcontent) {
 		var dateo = Date.parse(date.substring(6,10) + '-' + date.substring(3,5) + '-' + date.substring(0,2));
 		if (dateo < new Date()) {
 			workflowformfields['List$chkTick'].push(id);
+			approved++;
 		}
 	});
 	workflowformfields.BulkAction = 1; // "Bulk Approve"
@@ -126,7 +128,7 @@ readFile(fname).then(function(fcontent) {
 }).then(function(postresponse){
 	return rq({url: lgouturl});
 }).then(function(logoutresponse) {
-	console.log('OK');
+	console.log('OK, ' + approved + ' days approved.');
 }, function(err) {
 	console.error(err);
 });
