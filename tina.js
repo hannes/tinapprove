@@ -127,7 +127,8 @@ readFile(fname).then(function(fcontent) {
 }).then(function(postresponse){
 	return rq({url: lgouturl});
 }).then(function(logoutresponse) {
-	console.log('OK, ' + approved + ' day'+ approved != 1 ? 's' : '' +' approved.');
+	var s = approved != 1 ? 's' : '';
+	console.log('OK, ' + approved + ' day' + s +' approved.');
 }, function(err) {
 	console.error(err);
 });
