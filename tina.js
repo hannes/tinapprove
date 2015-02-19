@@ -4,7 +4,6 @@ var request = require('request');
 var readline = require('readline');
 var fs = require('fs');
 
-
 request = request.defaults({jar: true, useQuerystring: true});
 
 var rl;
@@ -128,7 +127,7 @@ readFile(fname).then(function(fcontent) {
 }).then(function(postresponse){
 	return rq({url: lgouturl});
 }).then(function(logoutresponse) {
-	console.log('OK, ' + approved + ' days approved.');
+	console.log('OK, ' + approved + ' day'+ approved != 1 ? 's' : '' +' approved.');
 }, function(err) {
 	console.error(err);
 });
